@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  frps:
+    image: ddosakura/frps:0.21.0
+    ports:
+      - 7000:7000
+      - 7001:7001
+      - 80:80
+      - 443:443
+      - 6000:6000
+    volumes:
+      - /home/moyinzi/workplace/frp2docker/etc/frps:/etc/frp:ro
+  
+  nginx:
+    image: nginx:1.15.6
+    volumes:
+      - /home/moyinzi/workplace/frp2docker/etc/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - /home/moyinzi/workplace/frp2docker/etc/cert:/root/cert:ro
+
+  frpc:
+    image: ddosakura/frpc:0.21.0
+    volumes:
+      - /home/moyinzi/workplace/frp2docker/etc/frpc:/etc/frp:ro
+
+  server:
+    image: rastasheep/ubuntu-sshd:18.04
+
+# the password for rastasheep/ubuntu-sshd's root is `root`

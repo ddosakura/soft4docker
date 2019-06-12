@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  nginx:
+    image: nginx:1.15.6
+    volumes:
+      - /path/to/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - /path/to/cert:/root/cert:ro
+
+  frpc:
+    image: ddosakura/frpc:0.21.0
+    volumes:
+      - /path/to/frpc:/etc/frp:ro
